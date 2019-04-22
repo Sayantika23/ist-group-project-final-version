@@ -1,0 +1,92 @@
+.Head {
+  /* border: 1px solid green; */
+  position: relative;
+  top: 90px;
+  width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  justify-items: left;
+}
+
+.HeadPhoto {
+  position: relative;
+  /* border: 5px solid green; */
+  width: 798px;
+  overflow: hidden;
+}
+
+.HeadPhoto-Container {
+  /* border: 5px solid green; */
+  position: relative;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  transition: transform 1s;
+}
+
+.HeadPhoto-Container img {
+  box-shadow: inset 0px 10px 50px 0px #333333;
+  /* mix-blend-mode: darken; */
+}
+
+/* .Left {
+    left: 8px;
+}
+
+.Right {
+    right: 8px;
+} */
+
+.Dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 20px);
+}
+
+.HeadButton {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.MainAD .ad {
+  /* border: 1px solid green; */
+  position: absolute;
+  text-align: right;
+  background-color: rgba(0, 0, 255, 0.386);
+  -webkit-text-fill-color: #333333;
+  font-size: 12px;
+  padding: 3px 10px;
+}
+
+@media (max-width: 640px) {
+  .MainAD {
+    display: none;
+  }
+  .Head {
+    position: relative;
+    top: 90px;
+    width: 100%;
+    margin: auto;
+    display: block;
+    /* grid-template-columns: 100%;   */
+  }
+  .HeadPhoto {
+    width: 100%;
+  }
+  .HeadPhoto-Container {
+    width: 100%;
+  }
+  .HeadPhoto-Container img {
+    box-shadow: inset 0px 10px 50px 0px #333333;
+    transform: translateX(-5%);
+    /* mix-blend-mode: darken; */
+  }
+  
+}

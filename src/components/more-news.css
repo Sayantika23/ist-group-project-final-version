@@ -1,0 +1,35 @@
+.MoreNews {
+  /* border: 1px solid green; */
+  position: relative;
+  top: 300px;
+  width: 1200px;
+  margin: auto;
+}
+
+.MoreNewsContainer {
+  position: relative;
+  top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .MoreNewsContainer {
+    position: relative;
+    top: 50px;
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+  }
+  .MoreNews {
+    /* border: 1px solid green; */
+    position: relative;
+    top: 300px;
+    width: 100%;
+    margin: auto;
+  }
+  .MoreNews img {
+    width: 100%;
+  }
+}
