@@ -7,6 +7,7 @@ import sessionManager from "../commons/session-manager";
 
 import Hamburger from "./hamburger";
 
+
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +43,8 @@ export default class Header extends React.Component {
 
   render() {
     const userStatus =
-      this.state.session && this.state.session.userId ? (
+      (this.state.session && this.state.session.userId ? 
+        (
         <div>
           <Link to="/shoppingCart">
             <img
@@ -51,12 +53,12 @@ export default class Header extends React.Component {
               alt="Shopping Cart Icon"
             />
           </Link>
-          <h1>
+          <h1> 
             Welcome, {this.state.session.username}
           </h1>
           <button onClick={this.logout}>Logout</button>
         </div>
-      ) : (
+      ) : 
         <a href="/login">
           <h1>LOG IN</h1>
         </a>
@@ -72,9 +74,9 @@ export default class Header extends React.Component {
         </Link>
         <div className="Main-Nav">
           <div className="Menu">
-            <a href="#">
-              <h1>NEWS</h1>
-            </a>
+            <Link to="/references">
+              <h1>REFERENCES</h1>
+            </Link>
           </div>
           <div className="Menu">
             <div className="Menu1">
@@ -94,7 +96,7 @@ export default class Header extends React.Component {
             </div>
             <div className="DropDown">
               <Link to="/ranking">Ranking</Link>
-              <a href="http://results.ittf.link/">Stat</a>
+              <Link to="/stat">Stat</Link>
             </div>
           </div>
           <div className="Menu">
