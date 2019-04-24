@@ -2,8 +2,10 @@ class SessionManager {
     setSession(session) {
         this.session = session;
 
-        window.localStorage.setItem('userId', this.session.userId);
-        window.localStorage.setItem('username', this.session.username);
+        if(this.session.userId && this.session.username) {
+            window.localStorage.setItem('userId', this.session.userId);
+            window.localStorage.setItem('username', this.session.username);
+        }
     }
 
     getSession() {

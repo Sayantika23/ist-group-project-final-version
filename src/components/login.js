@@ -16,7 +16,8 @@ export default class Login extends Component {
             password: '',
             status: {
                 isLoggedIn: false
-            }
+            },
+            messageToDisplay: ''
         };
 
         this.login = this.login.bind(this);
@@ -26,27 +27,36 @@ export default class Login extends Component {
     login(e) {
         e.preventDefault();
 
-        fetch('https://people.rit.edu/sxb2606/646/group-project2/Final_Group_Project_Backend/login.api.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: 'username=' + this.state.username + '&password=' + this.state.password
-        })
-        .then(res => res.json())
-        .then(status => {
-            console.log('Received Status from Server', status);
-            sessionManager.setSession(status);
+        if (this.state.username && this.state.password) {
+            fetch('https://people.rit.edu/sxb2606/646/group-project2/Final_Group_Project_Backend/login.api.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'username=' + this.state.username + '&password=' + this.state.password
+            })
+                .then(res => res.json())
+                .then(status => {
+                    console.log('Received Status from Server', status);
+                    sessionManager.setSession(status);
+                    this.setState({
+                        status: status
+                    });
+
+                    if(!status.isLoggedIn) {
+                        this.state.messageToDisplay = 'Invalid username or password. Please try again.';
+                    }
+                });
+        } else {
             this.setState({
-                status: {
-                    isLoggedIn: true
-                }
+                messageToDisplay: 'Please enter the username and password'
             });
-        });
+        }
+
     }
 
     componentWillMount() {
-        if(sessionManager.isLoggedIn()) {
+        if (sessionManager.isLoggedIn()) {
             this.setState({
                 status: {
                     isLoggedIn: true
@@ -61,7 +71,7 @@ export default class Login extends Component {
             return <Redirect to="/" />
         }
     }
-    
+
     onChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -69,6 +79,8 @@ export default class Login extends Component {
     }
 
     render() {
+        const $displayMessage = this.state.messageToDisplay ? <p>{this.state.messageToDisplay}</p> : null;
+
         return (
             <div className="login-page">
                 <Header />
@@ -78,19 +90,23 @@ export default class Login extends Component {
                     <p>Try Username <span>jghidiu</span> and password <span>p@ssw0rd</span></p>
                 </div>
 
+                <div className="message">
+                    {$displayMessage}
+                </div>
+
                 <form onSubmit={this.login}>
-                    <div style={{position: "relative"}}>
-                    <label htmlFor="username">
-                        Username
+                    <div style={{ position: "relative" }}>
+                        <label htmlFor="username">
+                            Username
                         <input name="username" type="text" onChange={this.onChange} value={this.state.username} />
-                    </label>
+                        </label>
                     </div>
 
-                    <div style={{position: "relative"}}>
-                    <label htmlFor="username">
-                        Password
+                    <div style={{ position: "relative" }}>
+                        <label htmlFor="username">
+                            Password
                         <input name="password" type="password" onChange={this.onChange} value={this.state.password} />
-                    </label>
+                        </label>
                     </div>
 
                     <button type="submit">Login</button>
